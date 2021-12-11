@@ -1,17 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import AppHeader from "./components/app-header";
+import AppInput from "./components/app-input";
+import AppList from "./components/app-list";
+import AppItemFilters from "./components/app-item-filters";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+import "./index.css";
+
+const App = () => {
+  const appData = [
+    { label: "Drink Coffee", important: false, id: 0 },
+    { label: "Make good anyware", important: true, id: 1 },
+    { label: "Have a lunch", important: false, id: 2 },
+  ];
+  return (
+    <div className="container">
+      <AppHeader toDo = {1} done = {3}/>
+      <div className="top-panel d-flex">
+        <AppInput />
+        <AppItemFilters />
+      </div>
+      <AppList data={appData} />
+    </div>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));

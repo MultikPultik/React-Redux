@@ -1,0 +1,16 @@
+
+.app-list {
+  padding: .75rem 0; 
+}
+
+.app-list-item-label{
+  line-height: 40px;
+  font-weight: bold;
+  color: steelblue;
+}
+
+.app-list button {
+  width: 40px;
+  margin: 3px;
+}
+
