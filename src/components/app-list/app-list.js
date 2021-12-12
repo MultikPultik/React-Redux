@@ -1,6 +1,6 @@
 import React from "react";
 
-import AppListItem from "./app-list-item";
+import AppListItem from "../app-list-item";
 
 import "./app-list.css"
 
