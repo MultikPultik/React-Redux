@@ -4,6 +4,10 @@ import "./app-list-item.css";
 
 export default class AppListItem extends Component {
   
+  state = {
+    done: false,
+  }
+
   //Это старый способ вытащить this
   // constructor() {
   //   super();
@@ -14,21 +18,30 @@ export default class AppListItem extends Component {
 
   //это новый способ. Заменяет constructor и super
   onLabelClick = () => {
-      console.log(`${this.props.label}`);
+      // console.log(`${this.props.label}`);
+      this.setState({
+        done: true
+      })
   };
-
+  
   render() {
-    const { label, important = false } = this.props;
 
+    const { label, important = false } = this.props;
+    const {done} = this.state;
     const style = {
       color: important ? "steelblue" : "black",
     };
+    
+    let classNames = 'app-list-item-label';
+    if (done){
+      classNames += ' done'
+    }
 
     return (
       <span className="app-list-item">
         <span
           style={style}
-          className="app-list-item-label"
+          className={classNames}
           onClick={this.onLabelClick}
         >
           {label}
