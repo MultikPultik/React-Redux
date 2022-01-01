@@ -15,12 +15,17 @@ const App = () => {
   ];
   return (
     <div className="container">
-      <AppHeader toDo = {1} done = {3}/>
+      <AppHeader toDo={1} done={3} />
       <div className="top-panel d-flex">
         <AppInput />
         <AppItemFilters />
       </div>
-      <AppList data={appData} />
+      <AppList
+        data={appData}
+        onDeleted={(id) => {
+          console.log("del ", id);
+        }}
+      />
     </div>
   );
 };

@@ -5,8 +5,6 @@
 
 .app-list-item-label{
   line-height: 40px;
-  font-weight: bold;
-  color: steelblue;
   cursor: pointer;
 }
 
@@ -15,7 +13,11 @@
   margin: 3px;
 }
 
-.done{
+.app-list-item.done .app-list-item-label {
   text-decoration: line-through;
 }
 
+.app-list-item.important .app-list-item-label{
+  font-weight: bold;
+  color: steelblue;
+}

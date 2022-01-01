@@ -19,39 +19,52 @@ export default class AppListItem extends Component {
   //это новый способ. Заменяет constructor и super
   onLabelClick = () => {
       // console.log(`${this.props.label}`);
-      this.setState({
-        done: true
+      this.setState(({done})=>{
+        return {
+          done: !done,
+        }
       })
   };
+
+  onMarkImportant = () => {
+    this.setState((state)=>{
+      return {important: !state.important}
+    })
+  }
   
   render() {
 
-    const { label, important = false } = this.props;
-    const {done} = this.state;
-    const style = {
-      color: important ? "steelblue" : "black",
-    };
-    
-    let classNames = 'app-list-item-label';
+    const { label, onDeleted } = this.props;
+    const {done, important} = this.state;
+    let classNames = 'app-list-item';
+
     if (done){
-      classNames += ' done'
+      classNames += ' done';
+    }
+    if (important) {
+      classNames += ' important';
     }
 
     return (
-      <span className="app-list-item">
+      <span className={classNames}>
         <span
-          style={style}
-          className={classNames}
+          className="app-list-item-label"
           onClick={this.onLabelClick}
         >
           {label}
         </span>
 
-        <button type="button" className="btn btn-outline-success float-right">
+        <button type="button" className="btn btn-outline-success float-right"
+        onClick={this.onMarkImportant}
+        >
           <i className="fas fa-exclamation"></i>
         </button>
 
-        <button type="button" className="btn btn-outline-danger float-right">
+        <button 
+          type="button" 
+          className="btn btn-outline-danger float-right"
+          onClick={onDeleted}
+        >
           <i className="far fa-trash-alt"></i>
         </button>
       </span>
