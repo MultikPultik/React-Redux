@@ -16,10 +16,10 @@ const AppList = ({ data, onDeleted, onToggleImportant, onToggleDone }) => {
             onDeleted(id);
           }}
           onToggleImportant={() => {
-            onToggleDone(id);
+            onToggleImportant(id);
           }}
           onToggleDone={() => {
-            onToggleImportant(id);
+            onToggleDone(id);
           }}
         />
       </li>

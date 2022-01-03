@@ -13,9 +13,9 @@ export default class App extends Component {
 
   state = {
     appData: [
-      { label: "Drink Coffee", important: false, id: 0 },
-      { label: "Make good anyware", important: true, id: 1 },
-      { label: "Have a lunch", important: false, id: 2 },
+      { label: "Drink Coffee", important: false, done:false, id: 0 },
+      { label: "Make good anyware", important: true, done:false, id: 1 },
+      { label: "Have a lunch", important: false, done:false, id: 2 },
     ],
   };
 
@@ -36,25 +36,43 @@ export default class App extends Component {
     });
   };
 
-  onToggleImportant = (id) => {
-    console.log('Important - ', id);
+  toggleProp = (id, prop) => {
+    this.setState(({ appData }) => {
+      const idx = appData.findIndex((el) => el.id === id);
+      const oldItem = appData[idx];
+      const newItem = { ...oldItem, [prop]: !oldItem[prop] };
+
+      const newArr = [
+        ...appData.slice(0, idx),
+        newItem,
+        ...appData.slice(idx + 1),
+      ];
+      return { appData: newArr };
+    });
   }
+
+  onToggleImportant = (id) => {
+    this.toggleProp(id, 'important');
+  };
 
   onToggleDone = (id) => {
-    console.log('Done - ', id);
-  }
+    this.toggleProp(id, 'done');
+  };
 
   render() {
+    const todoDone = this.state.appData.filter((el) => el.done).length;
+    const todo = this.state.appData.length - todoDone;
+    
     return (
       <div className="container">
-        <AppHeader toDo={1} done={3} />
+        <AppHeader toDo={todo} done={todoDone} />
         <div className="top-panel d-flex">
           <AppInput />
           <AppItemFilters />
         </div>
-        <AppList 
-          data={this.state.appData} 
-          onDeleted={this.deleteItem} 
+        <AppList
+          data={this.state.appData}
+          onDeleted={this.deleteItem}
           onToggleImportant={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
         />
