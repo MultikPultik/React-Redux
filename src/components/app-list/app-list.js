@@ -4,7 +4,7 @@ import AppListItem from "../app-list-item";
 
 import "./app-list.css";
 
-const AppList = ({ data, onDeleted }) => {
+const AppList = ({ data, onDeleted, onToggleImportant, onToggleDone }) => {
   const elements = data.map((item) => {
     const { id, ...params } = item;
 
@@ -14,6 +14,12 @@ const AppList = ({ data, onDeleted }) => {
           {...params}
           onDeleted={() => {
             onDeleted(id);
+          }}
+          onToggleImportant={() => {
+            onToggleDone(id);
+          }}
+          onToggleDone={() => {
+            onToggleImportant(id);
           }}
         />
       </li>

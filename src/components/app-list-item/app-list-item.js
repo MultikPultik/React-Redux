@@ -4,11 +4,7 @@ import "./app-list-item.css";
 
 export default class AppListItem extends Component {
   
-  state = {
-    done: false,
-  }
-
-  //Это старый способ вытащить this
+   //Это старый способ вытащить this
   // constructor() {
   //   super();
   //   this.onLabelClick = () => {
@@ -16,26 +12,10 @@ export default class AppListItem extends Component {
   //   };
   // }
 
-  //это новый способ. Заменяет constructor и super
-  onLabelClick = () => {
-      // console.log(`${this.props.label}`);
-      this.setState(({done})=>{
-        return {
-          done: !done,
-        }
-      })
-  };
-
-  onMarkImportant = () => {
-    this.setState((state)=>{
-      return {important: !state.important}
-    })
-  }
-  
+   
   render() {
 
-    const { label, onDeleted } = this.props;
-    const {done, important} = this.state;
+    const { label, onDeleted, onToggleDone, onToggleImportant, important, done } = this.props;
     let classNames = 'app-list-item';
 
     if (done){
@@ -49,13 +29,13 @@ export default class AppListItem extends Component {
       <span className={classNames}>
         <span
           className="app-list-item-label"
-          onClick={this.onLabelClick}
+          onClick={onToggleImportant}
         >
           {label}
         </span>
 
         <button type="button" className="btn btn-outline-success float-right"
-        onClick={this.onMarkImportant}
+        onClick={onToggleDone}
         >
           <i className="fas fa-exclamation"></i>
         </button>
